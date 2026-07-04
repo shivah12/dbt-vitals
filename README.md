@@ -96,34 +96,7 @@ not npm — `pip install dbt-vitals` is the equivalent of `npm install`.
    twine check dist/*
    ```
 
-5. Upload to TestPyPI first:
 
-   ```bash
-   twine upload --repository testpypi dist/*
-   # username: __token__
-   # password: <your TestPyPI API token, including the pypi- prefix>
-   ```
-
-   Verify it installs cleanly:
-
-   ```bash
-   pip install --index-url https://test.pypi.org/simple/ --no-deps dbt-vitals
-   dbt-vitals --version
-   ```
-
-6. Once that works, upload for real:
-
-   ```bash
-   twine upload dist/*
-   # username: __token__
-   # password: <your PyPI API token>
-   ```
-
-7. From then on, anyone can install it with:
-
-   ```bash
-   pip install dbt-vitals
-   ```
 
 To ship a new version later: bump `version` in `pyproject.toml`, delete the
 old `dist/` folder, rebuild (`python -m build`), and `twine upload dist/*`
