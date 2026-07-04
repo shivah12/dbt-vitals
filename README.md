@@ -1,8 +1,8 @@
-# dbt-doctor
+# dbt-vitals
 
 Static analysis and health scoring for dbt projects — the "cargo clippy for dbt."
 
-Unlike a SQL linter (indentation, keyword casing), dbt-doctor looks at your
+Unlike a SQL linter (indentation, keyword casing), dbt-vitals looks at your
 project's *structure*: dead models, missing tests, duplicated business logic,
 documentation coverage, and (given warehouse stats) incremental-model
 candidates. It parses `manifest.json` / `catalog.json` — the artifacts dbt
@@ -29,8 +29,8 @@ Warnings: 8   Critical: 0   Info: 4
 Requires Python 3.9+.
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/dbt-doctor.git
-cd dbt-doctor
+git clone https://github.com/YOUR_GITHUB_USERNAME/dbt-vitals.git
+cd dbt-vitals
 
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
@@ -47,7 +47,7 @@ pytest
 Try the CLI against the bundled example (no real dbt project needed):
 
 ```bash
-dbt-doctor analyze . --manifest examples/sample_manifest.json --catalog examples/sample_catalog.json
+dbt-vitals analyze . --manifest examples/sample_manifest.json --catalog examples/sample_catalog.json
 ```
 
 Run it against a real dbt project:
@@ -55,13 +55,13 @@ Run it against a real dbt project:
 ```bash
 cd /path/to/your/dbt/project
 dbt compile               # or `dbt docs generate` to also get catalog.json
-dbt-doctor analyze .
+dbt-vitals analyze .
 ```
 
 ### CLI options
 
 ```bash
-dbt-doctor analyze <target_dir>          # target_dir defaults to "."
+dbt-vitals analyze <target_dir>          # target_dir defaults to "."
   --manifest PATH        # override manifest.json location
   --catalog PATH         # override catalog.json location
   --json                 # machine-readable output
@@ -71,14 +71,14 @@ dbt-doctor analyze <target_dir>          # target_dir defaults to "."
 
 ## CI integration
 
-`.github/workflows/dbt-doctor.yml` is included — it runs `dbt-doctor` on every
+`.github/workflows/dbt-vitals.yml` is included — it runs `dbt-vitals` on every
 PR, posts the health score as a comment, and fails the build if the score
 drops below a threshold. Adjust the `dbt compile` step for your adapter/profile.
 
 ## Publishing to PyPI
 
 This is a **Python** package, so it's published to [PyPI](https://pypi.org),
-not npm — `pip install dbt-doctor` is the equivalent of `npm install`.
+not npm — `pip install dbt-vitals` is the equivalent of `npm install`.
 
 1. Create accounts at [pypi.org](https://pypi.org/account/register/) and
    [test.pypi.org](https://test.pypi.org/account/register/) (the sandbox —
@@ -107,8 +107,8 @@ not npm — `pip install dbt-doctor` is the equivalent of `npm install`.
    Verify it installs cleanly:
 
    ```bash
-   pip install --index-url https://test.pypi.org/simple/ --no-deps dbt-doctor
-   dbt-doctor --version
+   pip install --index-url https://test.pypi.org/simple/ --no-deps dbt-vitals
+   dbt-vitals --version
    ```
 
 6. Once that works, upload for real:
@@ -122,7 +122,7 @@ not npm — `pip install dbt-doctor` is the equivalent of `npm install`.
 7. From then on, anyone can install it with:
 
    ```bash
-   pip install dbt-doctor
+   pip install dbt-vitals
    ```
 
 To ship a new version later: bump `version` in `pyproject.toml`, delete the
@@ -132,14 +132,14 @@ again — PyPI rejects re-uploading an existing version number.
 ## Pushing to GitHub
 
 ```bash
-cd dbt-doctor
+cd dbt-vitals
 git init
 git add .
-git commit -m "Initial commit: dbt-doctor MVP"
+git commit -m "Initial commit: dbt-vitals MVP"
 
 # Create the repo on GitHub first (via github.com or `gh repo create`),
 # then:
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/dbt-doctor.git
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/dbt-vitals.git
 git branch -M main
 git push -u origin main
 ```
@@ -147,13 +147,13 @@ git push -u origin main
 If you use the [GitHub CLI](https://cli.github.com/) instead of the website:
 
 ```bash
-gh repo create dbt-doctor --public --source=. --remote=origin --push
+gh repo create dbt-vitals --public --source=. --remote=origin --push
 ```
 
 ## Project layout
 
 ```
-dbt-doctor/
+dbt-vitals/
   dbt_doctor/
     cli.py              # click CLI entry point
     parser.py           # manifest.json / catalog.json loading
