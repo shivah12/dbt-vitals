@@ -1,6 +1,6 @@
 # dbt-vitals
 
-Its a satic analysis and health scoring for dbt projects — the "cargo clippy for dbt."
+Its a static analysis and health scoring for dbt projects — the "cargo clippy for dbt."
 
 Unlike a SQL linter (indentation, keyword casing), dbt-vitals looks at your
 project's *structure*: dead models, missing tests, duplicated business logic,

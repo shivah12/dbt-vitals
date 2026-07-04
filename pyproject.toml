@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dbt-vitals"
-version = "0.1.0"
-description = "Static analysis and health scoring for dbt projects — lineage, test coverage, duplicate logic, and documentation checks."
+version = "0.1.1"
+description = "Its a static analysis and health scoring for dbt projects — test coverage, duplicate logic, and documentation checks."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
