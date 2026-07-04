@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "dbt-doctor"
+name = "dbt-vitals"
 version = "0.1.0"
 description = "Static analysis and health scoring for dbt projects — lineage, test coverage, duplicate logic, and documentation checks."
 readme = "README.md"
@@ -40,11 +40,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/shivah12/dbt-doctor"
-Issues = "https://github.com/shivah12/dbt-doctor/issues"
+Homepage = "https://github.com/shivah12/dbt-vitals"
+Issues = "https://github.com/shivah12/dbt-vitals/issues"
 
 [project.scripts]
-dbt-doctor = "dbt_doctor.cli:cli"
+dbt-vitals = "dbt_vitals.cli:cli"
 
 [tool.setuptools.packages.find]
-include = ["dbt_doctor*"]
+include = ["dbt_vitals*"]

@@ -1,0 +1,2 @@
+[console_scripts]
+dbt-vitals = dbt_vitals.cli:cli
