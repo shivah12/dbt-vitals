@@ -1,0 +1,4 @@
+click>=8.1
+rich>=13.0
+networkx>=3.0
+sqlglot>=23.0

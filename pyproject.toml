@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dbt-doctor"
+version = "0.1.0"
+description = "Static analysis and health scoring for dbt projects — lineage, test coverage, duplicate logic, and documentation checks."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Shreeti" }
+]
+keywords = ["dbt", "data-engineering", "static-analysis", "sql", "linter", "data-quality"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Database",
+]
+dependencies = [
+    "click>=8.1",
+    "rich>=13.0",
+    "networkx>=3.0",
+    "sqlglot>=23.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "build>=1.0",
+    "twine>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/shivah12/dbt-doctor"
+Issues = "https://github.com/shivah12/dbt-doctor/issues"
+
+[project.scripts]
+dbt-doctor = "dbt_doctor.cli:cli"
+
+[tool.setuptools.packages.find]
+include = ["dbt_doctor*"]

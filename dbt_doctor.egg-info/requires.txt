@@ -1,0 +1,9 @@
+click>=8.1
+rich>=13.0
+networkx>=3.0
+sqlglot>=23.0
+
+[dev]
+pytest>=7.4
+build>=1.0
+twine>=4.0

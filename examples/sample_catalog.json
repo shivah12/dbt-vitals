@@ -1,0 +1,14 @@
+{
+  "nodes": {
+    "model.demo.fct_orders": {
+      "stats": {
+        "row_count": {"value": 54000000}
+      }
+    },
+    "model.demo.dim_customer": {
+      "stats": {
+        "row_count": {"value": 120000}
+      }
+    }
+  }
+}

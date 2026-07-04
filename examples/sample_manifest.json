@@ -1,0 +1,98 @@
+{
+  "nodes": {
+    "model.demo.stg_orders": {
+      "resource_type": "model",
+      "name": "stg_orders",
+      "package_name": "demo",
+      "path": "staging/stg_orders.sql",
+      "description": "Staged raw orders.",
+      "config": {"materialized": "view"},
+      "raw_code": "select order_id, case when status = 'paid' then 'complete' when status = 'refunded' then 'refunded' else 'pending' end as order_status, customer_id from {{ source('raw', 'orders') }}",
+      "depends_on": {"nodes": []},
+      "columns": {
+        "order_id": {"name": "order_id", "description": "Primary key."},
+        "customer_id": {"name": "customer_id", "description": ""}
+      },
+      "tags": []
+    },
+    "model.demo.stg_orders_eu": {
+      "resource_type": "model",
+      "name": "stg_orders_eu",
+      "package_name": "demo",
+      "path": "staging/stg_orders_eu.sql",
+      "description": "",
+      "config": {"materialized": "view"},
+      "raw_code": "select order_id, case when status = 'paid' then 'complete' when status = 'refunded' then 'refunded' else 'pending' end as order_status from {{ source('raw', 'orders_eu') }}",
+      "depends_on": {"nodes": []},
+      "columns": {},
+      "tags": []
+    },
+    "model.demo.fct_orders": {
+      "resource_type": "model",
+      "name": "fct_orders",
+      "package_name": "demo",
+      "path": "marts/fct_orders.sql",
+      "description": "Order fact table.",
+      "config": {"materialized": "table"},
+      "raw_code": "select * from {{ ref('stg_orders') }}",
+      "depends_on": {"nodes": ["model.demo.stg_orders"]},
+      "columns": {
+        "order_id": {"name": "order_id", "description": "Primary key."}
+      },
+      "tags": []
+    },
+    "model.demo.dim_customer": {
+      "resource_type": "model",
+      "name": "dim_customer",
+      "package_name": "demo",
+      "path": "marts/dim_customer.sql",
+      "description": "",
+      "config": {"materialized": "table"},
+      "raw_code": "select customer_id, name from {{ ref('stg_orders') }}",
+      "depends_on": {"nodes": ["model.demo.stg_orders"]},
+      "columns": {"customer_id": {"name": "customer_id", "description": ""}},
+      "tags": []
+    },
+    "model.demo.new_table2": {
+      "resource_type": "model",
+      "name": "new_table2",
+      "package_name": "demo",
+      "path": "staging/new_table2.sql",
+      "description": "",
+      "config": {"materialized": "view"},
+      "raw_code": "select 1 as placeholder",
+      "depends_on": {"nodes": []},
+      "columns": {},
+      "tags": []
+    },
+    "test.demo.unique_fct_orders_order_id": {
+      "resource_type": "test",
+      "name": "unique_fct_orders_order_id",
+      "package_name": "demo",
+      "path": "",
+      "description": "",
+      "test_metadata": {"name": "unique", "kwargs": {"column_name": "order_id"}},
+      "depends_on": {"nodes": ["model.demo.fct_orders"]},
+      "columns": {},
+      "tags": []
+    },
+    "test.demo.not_null_fct_orders_order_id": {
+      "resource_type": "test",
+      "name": "not_null_fct_orders_order_id",
+      "package_name": "demo",
+      "path": "",
+      "description": "",
+      "test_metadata": {"name": "not_null", "kwargs": {"column_name": "order_id"}},
+      "depends_on": {"nodes": ["model.demo.fct_orders"]},
+      "columns": {},
+      "tags": []
+    }
+  },
+  "macros": {},
+  "sources": {
+    "source.demo.raw.orders": {
+      "name": "orders",
+      "description": "Raw orders table."
+    }
+  }
+}
