@@ -1,7 +1,7 @@
 Metadata-Version: 2.4
 Name: dbt-vitals
-Version: 0.1.1
-Summary: Static analysis and health scoring for dbt projects — lineage, test coverage, duplicate logic, and documentation checks.
+Version: 0.1.2
+Summary: Its a static analysis and health scoring for dbt projects — test coverage, duplicate logic, and documentation checks.
 Author: Shreeti
 License: MIT
 Project-URL: Homepage, https://github.com/shivah12/dbt-vitals
@@ -32,7 +32,7 @@ Dynamic: license-file
 
 # dbt-vitals
 
-Its a satic analysis and health scoring for dbt projects — the "cargo clippy for dbt."
+Its a static analysis and health scoring for dbt projects — the "cargo clippy for dbt."
 
 Unlike a SQL linter (indentation, keyword casing), dbt-vitals looks at your
 project's *structure*: dead models, missing tests, duplicated business logic,
