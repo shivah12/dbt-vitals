@@ -29,7 +29,7 @@ Warnings: 8   Critical: 0   Info: 4
 Requires Python 3.9+.
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/dbt-vitals.git
+git clone https://github.com/shivah12/dbt-vitals.git
 cd dbt-vitals
 
 python -m venv .venv
